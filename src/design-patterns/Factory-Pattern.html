@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <title>Factory-Pattern.html</title>
+</head>
+<body>
+  
+</body>
+<script>
+// A constructor for defining new cars
+function Car( options ) {
+
+// some defaults
+this.doors = options.doors || 4;
+this.state = options.state || "brand new";
+this.color = options.color || "silver";
+
+}
+
+// A constructor for defining new trucks
+function Truck( options){
+
+this.state = options.state || "used";
+this.wheelSize = options.wheelSize || "large";
+this.color = options.color || "blue";
+}
+
+
+// FactoryExample.js
+// Define a skeleton vehicle factory
+// 个人理解就是 对构造函数再一层包装,实现对多种构造函数的封装
+function VehicleFactory() {}
+
+// Define the prototypes and utilities for this factory
+
+// Our default vehicleClass is Car
+VehicleFactory.prototype.vehicleClass = Car;
+
+// Our Factory method for creating new Vehicle instances
+VehicleFactory.prototype.createVehicle = function ( options ) {
+
+switch(options.vehicleType){
+case "car":
+this.vehicleClass = Car;
+break;
+case "truck":
+this.vehicleClass = Truck;
+break;
+//defaults to VehicleFactory.prototype.vehicleClass (Car)
+}
+
+return new this.vehicleClass( options );
+
+};
+
+// Create an instance of our factory that makes cars
+var carFactory = new VehicleFactory();
+var car = carFactory.createVehicle( {
+vehicleType: "truck",
+color: "yellow",
+doors: 6 } );
+
+// Test to confirm our car was created using the vehicleClass/prototype Car
+
+// Outputs: true
+console.log( car instanceof Car );
+
+// Outputs: Car object of color "yellow", doors: 6 in a "brand new" state
+console.log( car );
+//Abstract Factories 抽象的工厂模式 000 该工厂也没有先车型,先对工厂进行购买,再销售,即先注册再获取
+var abstractVehicleFactory = (function () {
+  // Storage for our vehicle types
+  var types = {};
+ 
+  return {
+      getVehicle: function ( type, customizations ) {
+          var Vehicle = types[type];
+          return (Vehicle ? new Vehicle(customizations) : null);
+      },
+ 
+      registerVehicle: function ( type, Vehicle ) {
+          var proto = Vehicle.prototype;
+ 
+          // only register classes that fulfill the vehicle contract
+          if ( proto.drive && proto.breakDown ) {
+              console.log("here");
+              types[type] = Vehicle;
+          }
+ 
+          return abstractVehicleFactory;
+      }
+  };
+})();
+
+// Usage:
+Car.prototype.drive = function(){
+  console.log("坐稳啦,开车啦")
+}
+Car.prototype.breakDown = function(){
+  console.log("不行,不行,老司机也要翻车啦");
+}
+abstractVehicleFactory.registerVehicle( "car", Car );
+abstractVehicleFactory.registerVehicle( "truck", Truck );
+
+// Instantiate a new car based on the abstract vehicle type
+var car1 = abstractVehicleFactory.getVehicle( "car", {
+color: "lime green",
+state: "like new" } );
+
+// Instantiate a new truck in a similar manner
+var truck1 = abstractVehicleFactory.getVehicle( "truck", {
+wheelSize: "medium",
+color: "neon yellow" } );
+console.log('car1',car1);
+</script>
+
+</html>

@@ -1,0 +1,37 @@
+{
+  "name": "learning-path-recording-and-coding",
+  "version": "1.0.0",
+  "description": "个人学习记录,demo运行记录的仓库,方便之后的回顾,复盘",
+  "directories": {
+    "doc": "doc"
+  },
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs",
+    "deploy": "sh build.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jackluson/learn-path-recording-and-coding.git"
+  },
+  "keywords": [
+    "learn",
+    "record",
+    "front-end"
+  ],
+  "author": "jackluson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jackluson/learn-path-recording-and-coding/issues"
+  },
+  "homepage": "https://github.com/jackluson/learn-path-recording-and-coding#readme",
+  "devDependencies": {
+    "vuepress": "^0.14.10"
+  },
+  "dependencies": {
+    "webpack-dev-middleware": "^3.6.0"
+  },
+  "resolutions": {
+    "webpack-dev-middleware": "3.6.0"
+  }
+}

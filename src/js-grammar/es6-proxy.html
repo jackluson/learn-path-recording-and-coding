@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <title>es6-proxy.html</title>
+</head>
+<body>
+  <h3>代理 -- 个人理解是,在真正访问,操作目标对象之前,先经过代理对象,这样起到拦截的作用,代理操作支持get,set,has,deleteProperty,apply(拦截函数的调用,call,apply的操作)等</h3>
+  <h3>Proxy有时作用类似是对属性描述对象的强大补充,但有时不能与目标对象的属性描述对象矛盾</h3>
+  <h3>当目标对象设立代理对象后,内部的代理对象的this就指向了代理对象啦</h3>
+</body>
+<script>
+  let obj1 = {};
+  obj1 = Object.defineProperty(obj1, 'foo', {
+    value: 'bar',
+    configurable: true,
+    writable: true, //默认值为false
+    // get:function(){
+    //   return 'getter';
+    //   // return this.foo;
+    // },
+    // set: function(val){
+    //    console.log('setter: ' + val);
+    //   //  this.foo = val;
+    //    return val;
+    // }
+  });
+  const handler = {
+    get: function (target, key, receiver) {
+      console.log(`getting ${key}!`);
+      return Reflect.get(target, key, receiver);
+    },
+      set: function (obj, prop, value, receiver) {
+        console.log("joa");
+        obj[prop] = 'baz';
+      }
+  };
+  const proxy = new Proxy(obj1, handler);
+  proxy.foo = 'baz';
+  // proxy.foo // "bar"
+  // 解决this指向问题
+  const target = new Date('2015-01-01');
+    const handler = {
+      get(target, prop) {
+        if (prop === 'getDate') {
+          return target.getDate.bind(target);
+        }
+        return Reflect.get(target, prop);
+      }
+    };
+    const proxy = new Proxy(target, handler);
+
+    proxy.getDate() // 1
+  // 实现web服务请求
+  function createWebService(baseUrl) {
+      return new Proxy({}, {
+        get(target, propKey, receiver) {
+          return () => httpGet(baseUrl + '/' + propKey);
+        }
+      });
+    }
+  const service = createWebService('http://example.com/data');
+
+    service.employees().then(json => {
+      const employees = JSON.parse(json);
+      // ···
+  });
+</script>
+
+</html>

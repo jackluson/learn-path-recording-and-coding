@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <title>es6-Reflect.html</title>
+</head>
+<body>
+  <h3>Reflect对象为了js操作**对象**提供了新的API,避免了一些直接使用Object.xxx,Function.prototype.xxx的操作方法,Reflect对象可以直接拿到语言内部的方法</h3>
+  <h3>Reflect对象与Proxy对象的方法一一对应,两者密切相对,当使用Proxy,往往也使用到Reflect</h3>
+</body>
+<script>
+  //2. function 的调用apply
+  const ages = [11, 33, 12, 54, 18, 96];
+
+  // 旧写法
+  const youngest = Math.min.apply(Math, ages);
+  const oldest = Math.max.apply(Math, ages);
+  const type = Object.prototype.toString.call(youngest);
+
+  // 新写法
+  const youngest = Reflect.apply(Math.min, Math, ages);
+  const oldest = Reflect.apply(Math.max, Math, ages);
+  const type = Reflect.apply(Object.prototype.toString, youngest, []);
+</script>
+
+</html>

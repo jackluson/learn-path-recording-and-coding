@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div>输入base64字符串</div>
+    <textarea id="base64text" rows="10" cols="40">data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDI5NS45OTYgMjk1Ljk5NiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjk1Ljk5NiAyOTUuOTk2OyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4Ij4KPGc+Cgk8cGF0aCBkPSJNMTQ3Ljk5OCwwQzY2LjM5MiwwLDAsNjYuMzkyLDAsMTQ3Ljk5OHM2Ni4zOTIsMTQ3Ljk5OCwxNDcuOTk4LDE0Ny45OThzMTQ3Ljk5OC02Ni4zOTIsMTQ3Ljk5OC0xNDcuOTk4ICAgUzIyOS42MDUsMCwxNDcuOTk4LDB6IE0xNDcuOTk4LDI3OS45OTZjLTM2LjI1NiwwLTY5LjE0My0xNC42OTYtOTMuMDIyLTM4LjQ0Yy05LjUzNi05LjQ4Mi0xNy42MzEtMjAuNDEtMjMuOTM0LTMyLjQyICAgQzIxLjQ0MiwxOTAuODQ3LDE2LDE3MC4wNDcsMTYsMTQ3Ljk5OEMxNiw3NS4yMTQsNzUuMjE0LDE2LDE0Ny45OTgsMTZjMzQuNTIzLDAsNjUuOTg3LDEzLjMyOCw4OS41MzMsMzUuMTAyICAgYzEyLjIwOCwxMS4yODgsMjIuMjg5LDI0Ljg0NCwyOS41NTgsMzkuOTk2YzguMjcsMTcuMjM5LDEyLjkwNywzNi41MzgsMTIuOTA3LDU2LjkgICBDMjc5Ljk5NiwyMjAuNzgyLDIyMC43ODIsMjc5Ljk5NiwxNDcuOTk4LDI3OS45OTZ6IiBmaWxsPSIjRkZEQTQ0Ii8+Cgk8Y2lyY2xlIGN4PSI5OS42NjYiIGN5PSIxMTQuOTk4IiByPSIxNiIgZmlsbD0iI0ZGREE0NCIvPgoJPGNpcmNsZSBjeD0iMTk4LjY2NiIgY3k9IjExNC45OTgiIHI9IjE2IiBmaWxsPSIjRkZEQTQ0Ii8+Cgk8cGF0aCBkPSJNMTQ3LjcxNSwyMjkuOTk1YzMwLjk1NCwwLDYwLjYxOS0xNS44Myw3Ny42MDQtNDIuMTEzbC0xMy40MzktOC42ODRjLTE1LjU5NywyNC4xMzUtNDQuMTI2LDM3LjYwNC03Mi42OTMsMzQuMzA4ICAgYy0yMi4yNjItMi41NjctNDIuODQ5LTE1LjM5My01NS4wNzItMzQuMzA4bC0xMy40MzgsOC42ODRjMTQuNzksMjIuODg5LDM5LjcxNiwzOC40MDksNjYuNjc2LDQxLjUxOSAgIEMxNDAuODE0LDIyOS44LDE0NC4yNywyMjkuOTk1LDE0Ny43MTUsMjI5Ljk5NXoiIGZpbGw9IiNGRkRBNDQiLz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8Zz4KPC9nPgo8L3N2Zz4K</textarea>
+    <div>输入文件名</div>
+    <input id="filename" /><br />
+    <button id="btnGenerate">下载</button><br />
+    <a id="btnDownload"></a>
+    <script>
+        var base64text = document.getElementById("base64text");
+        var filename = document.getElementById("filename")
+        var btnGenerate = document.getElementById("btnGenerate");
+        var btnDownload = document.getElementById("btnDownload");
+ 
+        var MIME = {
+            "application/x-zip-compressed": "zip",
+            "application/javascript": "js",
+            "text/css": "css",
+            "text/plain": "txt",
+            "text/html": "html",
+            "text/xml": "xml",
+            "image/jpeg": "jpeg",
+            "image/png": "png",
+            "image/gif": "gif",
+            "image/svg+xml": "svg"
+        };
+ 
+        //文件名默认当前时间戳
+        filename.value = Date.now();
+ 
+        //检测点击下载按钮
+        btnGenerate.addEventListener("click", function (e) {
+            var fname = filename.value + "." + MIME[getContentType(base64text.value)];
+            var blob = getBlob(base64text.value);
+ 
+            if (navigator.msSaveBlob) {
+                navigator.msSaveBlob(blob, fname);
+            }
+            else {
+                btnDownload.download = fname;
+                btnDownload.href = URL.createObjectURL(blob);
+                btnDownload.click();
+            }
+        });
+ 
+        /**
+         * 获取Blob
+         * @param {stirng} base64
+         */
+        function getBlob(base64) {
+            return b64toBlob(getData(base64), getContentType(base64));
+        }
+ 
+        /**
+         * 获取文件类型
+         * @param {string} base64
+         */
+        function getContentType(base64) {
+            return /data:([^;]*);/i.exec(base64)[1];
+        }
+ 
+        /**
+         * 获取base64中的数据
+         * @param {string} base64
+         */
+        function getData(base64) {
+            return base64.substr(base64.indexOf("base64,") + 7, base64.length);
+        }
+ 
+        /**
+         * base64转Blob
+         * @param {string} b64Data
+         * @param {string} contentType
+         * @param {number} sliceSize
+         */
+        function b64toBlob(b64Data, contentType, sliceSize) {
+            contentType = contentType || '';
+            sliceSize = sliceSize || 512;
+ 
+            var byteCharacters = atob(b64Data);
+            var byteArrays = [];
+ 
+            for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+                var slice = byteCharacters.slice(offset, offset + sliceSize);
+ 
+                var byteNumbers = new Array(slice.length);
+                for (var i = 0; i < slice.length; i++) {
+                    byteNumbers[i] = slice.charCodeAt(i);
+                }
+ 
+                var byteArray = new Uint8Array(byteNumbers);
+ 
+                byteArrays.push(byteArray);
+            }
+ 
+            var blob = new Blob(byteArrays, { type: contentType });
+            return blob;
+        }
+    </script>
+</body>
+</html>

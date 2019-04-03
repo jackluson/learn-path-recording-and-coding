@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <title>Module-Pattern.html</title>
+</head>
+
+<body>
+  <h3>模块模式--类似类的特点,有私有变量,方法和公有的特性方法,但是由于es5没有像其他语言一样有明显的私有修饰符,所以js利用立即执行函数模拟类的概念,立即执行函数会返回一个对象</h3>
+  <h3>该对象包含着可以被外界利用的属性和方法</h3>
+  <h3>特点:1.调用内部函数时必须带模块的名字</h3>
+  <h3>特点:2.模块的内部变量通过暴露出去的方法进去访问</h3>
+  <h3>使用场景:如果我们必须创建一个对象并以某些数据进行初始化，同时还要公开一些能够访问这些私有数据的方法，那么我们这个时候就可以使用模块模式了。</h3>
+</body>
+<script>
+  // 模块模式
+  var testModule = (function () {
+
+    var counter = 0;
+
+    return {
+
+      incrementCounter: function () {
+        return counter++;
+      },
+      resetCounter: function () {
+        console.log("counter value prior to reset: " + counter);
+        counter = 0;
+      }
+    };
+
+  })();
+
+  // Usage:
+
+  // Increment our counter
+  testModule.incrementCounter();
+
+  // Check the counter value and reset
+  // Outputs: counter value prior to reset: 1
+  testModule.resetCounter();
+
+  var basketModule = (function () {
+
+  // privates
+
+  var basket = [];
+
+  function doSomethingPrivate() {
+  //...
+  }
+
+  function doSomethingElsePrivate() {
+  //...
+  }
+
+  // Return an object exposed to the public
+  return {
+
+    // Add items to our basket
+    addItem: function( values ) {
+    basket.push(values);
+    },
+
+    // Get the count of items in the basket
+    getItemCount: function () {
+    return basket.length;
+    },
+
+    // Public alias to a private function
+    doSomething: doSomethingPrivate,
+
+    // Get the total value of items in the basket
+    getTotal: function () {
+
+      var q = this.getItemCount(),
+      p = 0;
+
+      while (q--) {
+      p += basket[q].price;
+      }
+
+      return p;
+    }
+  };
+  })();
+  basketModule.addItem({
+  item: "bread",
+  price: 0.5
+  });
+
+  basketModule.addItem({
+  item: "butter",
+  price: 0.3
+  });
+
+  // Outputs: 2
+  console.log( basketModule.getItemCount() );
+
+  // Outputs: 0.8
+  console.log( basketModule.getTotal() );
+
+  // However, the following will not work:
+
+  // Outputs: undefined
+  // This is because the basket itself is not exposed as a part of our
+  // public API
+  console.log( basketModule.basket );
+
+  // This also won't work as it only exists within the scope of our
+  // basketModule closure, but not in the returned public object
+  console.log( basket );
+  // 理解增强的模块模式
+  function CustomType() {
+  this.name = "tugenhua";
+  };
+  CustomType.prototype.getName = function(){
+  return this.name;
+  }
+  var application = (function(){
+  // 定义私有
+  var privateA = "aa";
+  // 定义私有函数
+  function A(){};
+
+  // 实例化一个对象后，返回该实例，然后为该实例增加一些公有属性和方法
+  var object = new CustomType();
+
+  // 添加公有属性
+  object.A = "aa";
+  // 添加公有方法
+  object.B = function(){
+  return privateA;
+  }
+  // 返回该对象
+  return object;
+  })();
+</script>
+
+</html>

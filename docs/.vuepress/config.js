@@ -39,6 +39,14 @@ module.exports = {
           ['library/', 'Introduction'],
           'library/vuepress',
         ]
+      },
+      {
+        title: "计算机基础&原理",
+        collapsable: false,
+        children:[
+          ['basics-principle/', 'Introduction'],
+          'basics-principle/process-thread'
+        ]
       }
     ]
   },

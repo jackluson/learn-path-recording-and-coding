@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <title>Observer.html</title>
+</head>
+<body>
+  <button id="count">点将我</button>
+  
+  <div id="showcount"></div>
+</body>
+<script>
+  // 个人理解
+  // 1.观察者模式 --- 低耦合
+  // 通俗话说,就是list对象对应的key就是订阅事件,对应的值就是事件列表,触发了key事件,也同时执行了key的事件列表
+  var Event = (function () {
+      var list = {},
+        listen,
+        trigger,
+        remove;
+      listen = function (key, fn) {
+        if (!list[key]) {
+          list[key] = [];
+        }
+        list[key].push(fn);
+      };
+      trigger = function () {
+        var key = Array.prototype.shift.call(arguments),
+          fns = list[key];
+        if (!fns || fns.length === 0) {
+          return false;
+        }
+        for (var i = 0, fn; fn = fns[i++];) {
+          fn.apply(this, arguments);
+        }
+      };
+      remove = function (key, fn) {
+        var fns = list[key];
+        if (!fns) {
+          return false;
+        }
+        if (!fn) {
+          fns && (fns.length = 0);
+        } else {
+          for (var i = fns.length - 1; i >= 0; i--) {
+            var _fn = fns[i];
+            if (_fn === fn) {
+              fns.splice(i, 1);
+            }
+          }
+        }
+      };
+      return {
+        listen: listen,
+        trigger: trigger,
+        remove: remove
+      }
+    })();
+  
+  var b = (function () {
+      var div = document.getElementById("showcount");
+      Event.listen('add', function (count) {
+        div.innerHTML = count;
+      });
+    })();
+  var a = (function () {
+      var count = 0;
+      var button = document.getElementById("count");
+      button.onclick = function () {
+        console.log("count",count)
+        Event.trigger("add", count++);
+      }
+    })();
+  setTimeout(() => {
+    Event.remove('add');
+  }, 5000);
+</script>
+
+</html>

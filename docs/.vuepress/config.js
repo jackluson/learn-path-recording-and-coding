@@ -33,6 +33,14 @@ module.exports = {
     ],
     sidebar:[
       {
+        title: "Javascript",
+        collapsable: false,
+        children:[
+          ['javascript/', 'Introduction'],
+          'javascript/browser',
+        ]
+      },
+      {
         title: "框架&库",
         collapsable: false,
         children:[

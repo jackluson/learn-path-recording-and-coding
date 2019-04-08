@@ -15,7 +15,7 @@ module.exports = {
     ['link', {
       rel: 'apple-touch-icon',
       size: '72x72',
-      href: `/assets/images/apple-touch-icon-72.png`
+      href: '/assets/images/apple-touch-icon-72.png'
     }]
   ],
   serviceWorker: true,
@@ -38,6 +38,8 @@ module.exports = {
         children:[
           ['javascript/', 'Introduction'],
           'javascript/browser',
+          'javascript/eventloop',
+          'javascript/js-engine'
         ]
       },
       {

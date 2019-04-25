@@ -39,7 +39,8 @@ module.exports = {
           ['javascript/', 'Introduction'],
           'javascript/browser',
           'javascript/eventloop',
-          'javascript/js-engine'
+          'javascript/js-engine',
+          'javascript/design-patterns'
         ]
       },
       {

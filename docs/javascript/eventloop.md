@@ -3,8 +3,6 @@ date: 2019-04-18
 tags: javascipts
 ---
 
-[TOC]
-
 # EventLoop的理解
 
 ## JavaScript是单线程语言
@@ -190,8 +188,12 @@ console.log('script end')
 
 ![](https://raw.githubusercontent.com/jackluson/git-static/master/images/learn-path-recording-and-coding/20190418213100.png)
 
-> 参考链接:
+#### 总结
+以上就是关于EventLoop的知识总结
+
+参考链接:
 >
-> 1. **掘金** <https://juejin.im/post/5a69885351882573467d2a93>
-> 2. **掘金** <https://juejin.im/post/5a5d64fbf265da3e243b831f>
+> 1. **浏览器和NodeJS中不同的Event Loop** <https://github.com/kaola-fed/blog/issues/234>
+> 2. **一次弄懂Event Loop** <https://juejin.im/post/5c3d8956e51d4511dc72c200>
 > 3. **阮一峰** <http://www.ruanyifeng.com/blog/2013/10/event_loop.html>
+> 4. **运行机制：事件队列与调用栈** <https://github.com/bigdots/blog/issues/5>

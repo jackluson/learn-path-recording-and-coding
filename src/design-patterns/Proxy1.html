@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>The Proxy Pattern in jquery  </title>
+	<meta charset="utf-8">
+
+</head>
+<body>
+    <h3>$.prox()可用于控制函数执行的上下文,即是this</h3>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.4.0/dist/jquery.min.js"></script>
+    <script>
+        /* 一种情况 */
+        $( 'button' ).on( 'click', function () {
+        // Within this function, "this" refers to the element that was clicked
+            $( this ).addClass( 'active' );
+        });
+        // 用上$.proxy()
+        var proxy = $.proxy( function () {
+        // "this" now refers to our element as we wanted
+            $( this ).addClass( 'active' );
+        }, this);
+        $( 'button' ).on( 'click', function () { 
+            setTimeout(proxy , 500);
+
+        // the last "this" we're passing tells $.proxy() that our DOM element
+        // is the value we want "this" to refer to.
+        });
+        /* 对应源码 */
+        {
+            proxy: function( fn, context ) {
+            if ( typeof context === "string" ) {
+            var tmp = fn[ context ];
+            context = fn;
+            fn = tmp;
+            }
+
+            // Quick check to determine if target is callable, in the spec
+            // this throws a TypeError, but we will just return undefined.
+            if ( !jQuery.isFunction( fn ) ) {
+            return undefined;
+            }
+
+            // Simulated bind
+            var args = slice.call( arguments, 2 ),
+            proxy = function() {
+            return fn.apply( context, args.concat( slice.call( arguments ) ) );
+            };
+
+            // Set the guid of unique handler to the same of original handler, so it can be removed
+            proxy.guid = fn.guid = fn.guid || proxy.guid || jQuery.guid++;
+
+            return proxy;
+            }
+        }
+    </script>
+</body>
+</html>

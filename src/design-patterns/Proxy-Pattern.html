@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no">
+  <title>Proxy-Pattern.html</title>
+</head>
+<body>
+  <p>
+    <label>选择框</label>
+    <input type="checkbox" class="j-input" data-id="1" />
+  </p>
+  <p>
+    <label>选择框</label>
+    <input type="checkbox" class="j-input" data-id="2" />
+  </p>
+  <p>
+    <label>选择框</label>
+    <input type="checkbox" class="j-input" data-id="3" />
+  </p>
+  <p>
+    <label>选择框</label>
+    <input type="checkbox" class="j-input" data-id="4" />
+  </p>
+</body>
+<script>
+    // 个人理解
+    /* 代理,即是代替实际的对象做某些事情.其中一个是具体对象,一个是代理对象, */
+    /* 代理模式,为其他对象提供一种代理,得以能够对该对象进行访问控制,或者执行一些拦截操作 */
+// var myImage = (function () {
+//     var imgNode = document.createElement('img');
+//     document.body.appendChild(imgNode);
+//     return {
+//         setSrc: function (src) {
+//             imgNode.src = src;
+//         }
+//     };
+// })();
+// // 代理模式
+// var ProxyImage = (function () {
+//     var img = new Image();
+//     img.onload = function () {
+//         myImage.setSrc(this.src);
+//     };
+//     return {
+//         setSrc: function (src) {
+//             myImage.setSrc('http://img.lanrentuku.com/img/allimg/1212/5-121204193Q9-50.gif');
+//             img.src = src;
+//         }
+//     };
+// })();
+// // 调用方式
+// ProxyImage.setSrc('https://img.alicdn.com/tps/i4/TB1b_neLXXXXXcoXFXXc8PZ9XXX-130-200.png');
+// 虚拟代理合并http请求的理解
+// 本体函数
+var mainFunc = function(ids) {
+        console.log(ids); // 即可打印被选中的所有的id
+        // 再把所有的id一次性发ajax请求给服务器端
+};
+// 代理函数 通过代理函数获取所有的id 传给本体函数去执行
+var proxyFunc = (function(){
+        var cache = [],  // 保存一段时间内的id
+            timer = null; // 定时器
+        return function(checkboxs) {
+            // 判断如果定时器有的话，不进行覆盖操作
+            if(timer) {
+                return;
+            }
+            timer = setTimeout(function(){
+                // 在2秒内获取所有被选中的id，通过属性isflag判断是否被选中
+                for(var i = 0,ilen = checkboxs.length; i < ilen; i++) {
+                    if(checkboxs[i].hasAttribute('isflag')) {
+                        var id = checkboxs[i].getAttribute('data-id');
+                        cache[cache.length] = id;
+                    }
+                }
+                mainFunc(cache.join(',')); // 2秒后需要给本体函数传递所有的id
+                // 清空定时器
+                clearTimeout(timer);
+                timer = null;
+                cache = [];
+            },2000);
+        };
+})();
+var checkboxs = document.getElementsByClassName('j-input');
+for(var i = 0,ilen = checkboxs.length; i < ilen; i+=1) {
+        (function(i){
+            checkboxs[i].onclick = function(){
+                if(this.checked) {
+                    // 给当前增加一个属性
+                    this.setAttribute('isflag',1);
+                }else {
+                    this.removeAttribute('isflag');
+                }
+                // 调用代理函数
+                proxyFunc(checkboxs);
+            };
+        })(i);
+}
+// 理解缓存代理：
+// 计算乘法
+var mult = function () {
+        var a = 1;
+        for (var i = 0, ilen = arguments.length; i < ilen; i += 1) {
+            a = a * arguments[i];
+        }
+        return a;
+};
+// 计算加法
+var plus = function () {
+        var a = 0;
+        for (var i = 0, ilen = arguments.length; i < ilen; i += 1) {
+            a += arguments[i];
+        }
+        return a;
+};
+// 代理函数
+var proxyFunc = function (fn) {
+        var cache = {};  // 缓存对象
+        return function () {
+            var args = Array.prototype.join.call(arguments, ',');
+            console.log('cache',cache, args);
+            if (args in cache) {
+                console.log('in');
+                return cache[args];   // 使用缓存代理
+            }
+            console.log('cache', fn.apply(this, arguments), args);
+            cache[args] = fn.apply(this,arguments);
+            return cache[args];
+        };
+};
+var proxyMult = proxyFunc(mult);
+console.log(proxyMult(1, 2, 3, 4)); // 24
+// console.log(proxyMult(1, 2, 3, 4)); // 缓存取 24
+
+</script>
+
+</html>

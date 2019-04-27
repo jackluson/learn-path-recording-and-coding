@@ -27,6 +27,34 @@
     // 个人理解
     /* 代理,即是代替实际的对象做某些事情.其中一个是具体对象,一个是代理对象, */
     /* 代理模式,为其他对象提供一种代理,得以能够对该对象进行访问控制,或者执行一些拦截操作 */
+
+    // 代理对象一般和具体对象与一样的属性和方法(具体情况具体分析)
+    // 代理模式应用对比
+    // 1. es6中Proxy对象 -- 主要是对目标对象访问之前进行访问控制,拦截作用,对属性描述对象的强大补充
+    // 2. jQ中的$.proxy()对象是对函数使用,指定所调用时的上下文this
+    // 先声明美女对象
+var girl = function (name) {
+    this.name = name;
+};
+
+// 这是dudu
+var dudu = function (girl) {
+    this.girl = girl;
+    this.sendGift = function (gift) {
+        alert("Hi " + girl.name + ", dudu送你一个礼物：" + gift);
+    }
+};
+
+// 大叔是代理
+var proxyTom = function (girl) {
+    this.girl = girl;
+    this.sendGift = function (gift) {
+        (new dudu(girl)).sendGift(gift); // 替dudu送花咯
+    }
+};
+// 调用代理函数
+var proxy = new proxyTom(new girl("酸奶小妹"));
+proxy.sendGift("999朵玫瑰");
 // var myImage = (function () {
 //     var imgNode = document.createElement('img');
 //     document.body.appendChild(imgNode);

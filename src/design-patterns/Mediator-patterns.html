@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>JavaScript Patterns</title>
+    <meta charset="utf-8">
+</head>
+<body>
+选择颜色:
+    <select id="colorSelect">
+        <option value="">请选择</option>
+        <option value="red">红色</option>
+        <option value="blue">蓝色</option>
+    </select>
+    <br/>
+    <br/>
+    选择内存：
+    <select id="memorySelect">
+        <option value="">请选择</option>
+        <option value="32G">32G</option>
+        <option value="64G">64G</option>
+    </select>
+    <p>输入购买的数量: <input type="text" id="numberInput"/></p>
+    你选择了的颜色：<div id="colorInfo"></div>
+    你选择了内存：<div id="memoryInfo"></div>
+    <p>你输入的数量: <div id="numberInfo"></div> </p>
+    <button id="nextBtn" disabled="true">请选择手机颜色和购买数量</button>
+<div id="results"></div>
+    <script>
+        function Player(name) {
+            this.points = 0;
+            this.name = name;
+        }
+        Player.prototype.play = function () {
+            this.points += 1;
+            mediator.played();
+        };
+        var scoreboard = {
+
+            // 显示内容的容器
+            element: document.getElementById('results'),
+
+            // 更新分数显示
+            update: function (score) {
+                var i, msg = '';
+                for (i in score) {
+                    if (score.hasOwnProperty(i)) {
+                        msg += '<p><strong>' + i + '<\/strong>: ';
+                        msg += score[i];
+                        msg += '<\/p>';
+                    }
+                }
+                this.element.innerHTML = msg;
+            }
+        };
+
+        var mediator = {
+
+            // 所有的player
+            players: {},
+
+            // 初始化
+            setup: function () {
+                var players = this.players;
+                players.home = new Player('Home');
+                players.guest = new Player('Guest');
+            },
+
+            // play以后，更新分数
+            played: function () {
+                var players = this.players,
+                    score = {
+                        Home: players.home.points,
+                        Guest: players.guest.points
+                    };
+
+                scoreboard.update(score);
+            },
+
+            // 处理用户按键交互
+            keypress: function (e) {
+                e = e || window.event; // IE
+                if (e.which === 49) { // 数字键 "1"
+                    mediator.players.home.play();
+                    return;
+                }
+                if (e.which === 48) { // 数字键 "0"
+                    mediator.players.guest.play();
+                    return;
+                }
+            }
+        };
+
+        // go!
+        mediator.setup();
+        window.onkeypress = mediator.keypress;
+
+        // 30秒以后结束
+        setTimeout(function () {
+            window.onkeypress = null;
+            console.log('Game over!');
+        }, 30000);
+    </script>
+    <script>
+    	// 假设我们提前从后台获取到所有颜色手机的库存量
+var goods = {
+    // 手机库存
+    "red|32G": 6,
+    "red|64G": 16,
+    "blue|32G": 8,
+    "blue|64G": 18
+};
+/*
+我们下面分别来监听colorSelect的下拉框的onchange事件和numberInput输入框的oninput的事件，
+然后在这两个事件中作出相应的处理
+ */
+var colorSelect = document.getElementById("colorSelect"),
+    memorySelect = document.getElementById("memorySelect"),
+    numberInput = document.getElementById("numberInput"),
+    colorInfo = document.getElementById("colorInfo"),
+    numberInfo = document.getElementById("numberInfo"),
+    memoryInfo = document.getElementById("memoryInfo"),
+    nextBtn = document.getElementById("nextBtn");
+        
+// 监听change事件
+colorSelect.onchange = function(){
+    select();
+};
+numberInput.oninput = function(){
+    select();
+};
+memorySelect.onchange = function(){
+    select();    
+};
+function select(){
+    var color = colorSelect.value,   // 颜色
+        number = numberInput.value,  // 数量
+        memory = memorySelect.value, // 内存
+        stock = goods[color + '|' +memory];  // 该颜色手机对应的当前库存
+            
+    colorInfo.innerHTML = color;
+    numberInfo.innerHTML = number;
+    memoryInfo.innerHTML = memory;
+    // 如果用户没有选择颜色的话，禁用按钮
+    if(!color) {
+        nextBtn.disabled = true;
+        nextBtn.innerHTML = "请选择手机颜色";
+            return;
+        }
+        // 判断用户输入的购买数量是否是正整数
+        var reg = /^\d+$/g;
+        if(!reg.test(number)) {
+            nextBtn.disabled = true;
+            nextBtn.innerHTML = "请输入正确的购买数量";
+            return;
+        }
+        // 如果当前选择的数量大于当前的库存的数量的话，显示库存不足
+        if(number > stock) {
+            nextBtn.disabled = true;
+            nextBtn.innerHTML = "库存不足";
+            return;
+        }
+        nextBtn.disabled = false;
+        nextBtn.innerHTML = "放入购物车";
+    }
+    </script>
+</body>
+</html>

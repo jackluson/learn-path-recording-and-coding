@@ -58,6 +58,14 @@ module.exports = {
           ['basics-principle/', 'Introduction'],
           'basics-principle/process-thread'
         ]
+      },
+      {
+        title: "技术实现",
+        collapsable: false,
+        children:[
+          ['tech/', 'Introduction'],
+          'tech/real-time-video'
+        ]
       }
     ]
   },

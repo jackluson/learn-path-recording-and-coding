@@ -91,7 +91,13 @@
 
 RTMP(Real Time Messaging Protocol)是macromedia开发的一套视频直播协议，现在属于 Adobe。和 HLS 一样都可以应用于视频直播，区别是 RTMP **基于 flash **无法在 iOS 的浏览器里播放，但是实时性比 HLS 要好。所以一般使用这种协议来上传视频流，也就是视频流推送到服务器。
 
-![img](https://user-gold-cdn.xitu.io/2018/3/15/16228f66b4ed3670?imageView2/0/w/1280/h/960/format/webp/ignore-error/1)
+**关于RTMP 与 HLS 的比较 **
+
+
+
+![rtmp-vs-hls](../screenshots/rtmp-vs-hls.jpg)
+
+
 
 ### 五、关于HTTP-FLV
 
@@ -101,6 +107,8 @@ RTMP(Real Time Messaging Protocol)是macromedia开发的一套视频直播协议
 ```
 
 ### 六、兼容方案
+
+
 
 PC端
 
@@ -117,3 +125,11 @@ PC端
 2、不支持 flv.js 就使用 HLS，但是 HLS延迟非常大。
 
 3、HLS 也不支持就没法直播了，因为移动端都不支持Flash。
+
+
+
+### REFERENCE
+- [直播理论与实践](https://futu.im/article/live/)
+
+- [有支持M3U8格式的HTML5播放器吗？](https://www.zhihu.com/question/21087379)
+- [HTTP Live Streaming (HLS) - 概念](https://www.jianshu.com/p/2ce402a485ca)

@@ -87,7 +87,6 @@
   }
 ```
 
-### 
 
 ### 2.svg实现
 
@@ -259,6 +258,8 @@
 ## 小结
 
 > 结合兼容性,代码简洁性,三种方式各有优势。结合兼容性,我青睐使用svg实现
+>
+> [原文地址](https://jackluson.github.io/learn-path-recording-and-coding/effect/percent-ring.html)
 
 > 不如自己动手试试
 

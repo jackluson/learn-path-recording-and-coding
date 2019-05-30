@@ -66,6 +66,14 @@ module.exports = {
           ['tech/', 'Introduction'],
           'tech/real-time-video'
         ]
+      },
+      {
+        title: "动效",
+        collapsable: false,
+        children:[
+          ['effect/', 'Introduction'],
+          'effect/percent-ring'
+        ]
       }
     ]
   },

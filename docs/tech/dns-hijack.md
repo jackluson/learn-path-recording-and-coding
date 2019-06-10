@@ -108,7 +108,23 @@ dig tungee.com
 
 #### 3.DNS服务器
 
+#### 4.域名的层级
 
+从查询的步骤来看,域名是有层级的。
+
+> 举个例子来说,`www.tungee.com` 真正的域名是`www.tungee.com.root` 
+>
+> 因为所有的域名的根域名都是`.root` 所以默认都是省掉的
+
+根域名的下一级叫做‘顶级域名’（top-level domain），比如`.com` `.net`
+
+再下一级则是"次级域名"（second-level domain），比如`www.tungee.com`里面的`tungee`,这级域名用户是可以注册的
+
+再下一级是主机名（host），比如`www.tungee.com`里面的www，又称为"三级域名"，这是用户在自己的域里面为服务器分配的名称，是用户可以任意分配的
+
+> 主机名.次级域名.顶级域名.根域名
+>
+> `www.tungee.com.root`
 
 ### Reference 
 

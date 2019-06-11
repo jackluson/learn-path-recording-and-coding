@@ -1,4 +1,4 @@
-# 你所需要知道DNS劫持--web安全篇（1）
+# 你需要知道的“DNS劫持”--web安全篇（1）
 
 ### 一、前言
 
@@ -27,7 +27,7 @@ DNS(Domin Name System or Domain Name Service)，域名解析系统(服务) ：�
 
 > 比如我们在终端命令 dig `https://www.tungee.com/`(探迹科技)就可以看到对应的服务器IP(49.99.141.230)了
 >
-> ![1560171939541](https://raw.githubusercontent.com/jackluson/learn-path-recording-and-coding/master/docs/screenshots/1560171939541.png)
+> ![1560171939541](../screenshots/1560171939541.png)
 
 从`www.tungee.com` 到 `49.99.141.230`的过程就叫做域名解析，域名解析需要由专门的域名解析服务器来完成
 
@@ -37,7 +37,7 @@ DNS(Domin Name System or Domain Name Service)，域名解析系统(服务) ：�
 
 #### 1.查询步骤
 
-![img](https://raw.githubusercontent.com/jackluson/learn-path-recording-and-coding/master/docs/screenshots/g98x0nn0p1.jpeg)
+![img](../screenshots/g98x0nn0p1.jpeg)
 
 从上图（图片来源网络，如侵权请联系删）可以大概看出大体的步骤：
 
@@ -71,36 +71,36 @@ dig tungee.com
 
 随后会出现以下几节信息
 
-![1560173202968](https://raw.githubusercontent.com/jackluson/learn-path-recording-and-coding/master/docs/screenshots/1560173202968.png)
+![1560173202968](../screenshots/1560173202968.png)
 
 - 第一段是dig工具版本，查询参数和统计信息
 
-  ![1560173887079](https://raw.githubusercontent.com/jackluson/learn-path-recording-and-coding/master/docs/screenshots/1560173887079.png)
+  ![1560173887079](../screenshots/1560173887079.png)
 
 - 第二段是查询内容
 
-  ![1560174303420](https://raw.githubusercontent.com/jackluson/learn-path-recording-and-coding/master/docs/screenshots/1560174303420.png)
+  ![1560174303420](../screenshots/1560174303420.png)
 
 - 第三段是DNS服务器的答复
 
-  ![1560174346252](https://raw.githubusercontent.com/jackluson/learn-path-recording-and-coding/master/docs/screenshots/1560174346252.png)
+  ![1560174346252](../screenshots/1560174346252.png)
 
   >上面结果显示，tungee有1个A记录，即1个IP地址。
   >588是TTL值（Time to live 的缩写），表示缓存时间，即588秒之内不用重新查询。
 
 - 第四段显示 tungee.com的NS记录（Name Server的缩写），即哪些服务器负责管理tungee.com的DNS记录
 
-  ![1560174469165](https://raw.githubusercontent.com/jackluson/learn-path-recording-and-coding/master/docs/screenshots/1560174469165.png)
+  ![1560174469165](../screenshots/1560174469165.png)
 
   > 上面结果显示 tungee.com共有2条NS记录，即2个域名服务器，向其中任一台查询就能知道 tungee.com的IP地址是什么。
 
 - 第五段是上面2个域名服务器的IP地址，这是随着前一段一起返回的
 
-  ![1560174876546](https://raw.githubusercontent.com/jackluson/learn-path-recording-and-coding/master/docs/screenshots/1560174876546.png)
+  ![1560174876546](../screenshots/1560174876546.png)
 
 - 第六段是DNS服务器的一些传输信息
 
-  ![1560174932404](https://raw.githubusercontent.com/jackluson/learn-path-recording-and-coding/master/docs/screenshots/1560174932404.png)
+  ![1560174932404](../screenshots/1560174932404.png)
 
   > 上面结果显示，本机的DNS服务器是192.168.1.253，查询端口是53（DNS服务器的默认端口），以及回应长度是418字节。
 
@@ -116,13 +116,13 @@ dig tungee.com
 
 上面这个就是当前电脑的DNS服务器ip地址，这个DNS服务器的ip地址是自动分配（当然也可以自定义）的，当用户联网时，宽带运营商会分配一个DNS服务器，这个服务器通常情况下时最快，距离最近的服务器。
 
-![1560231821680](https://raw.githubusercontent.com/jackluson/learn-path-recording-and-coding/master/docs/screenshots/1560231821680.png)
+![1560231821680](../screenshots/1560231821680.png)
 
 > 上图就是window电脑的当前电脑分配的DNS服务器，Mac，Linux系统DNS服务器IP地址保存在/etc/resolv.conf文件中
 
 如果用户因为某些网络问题，安全问题需要手动设置DNS服务器也是可以的
 
-![1560236586648](https://raw.githubusercontent.com/jackluson/learn-path-recording-and-coding/master/docs/screenshots/1560236586648.png)
+![1560236586648](../screenshots/1560236586648.png)
 
 > 上图就是window设置DNS服务器页面，关于手动设置公共DNS服务器IP地址可以阅读[公共DNS哪家强？](<https://www.zhihu.com/question/32229915>)
 
@@ -167,31 +167,31 @@ dig +trace www.tungee.com
 >
 > 回答是根域名服务器目前全球一共只有十三台，从下面截图可以看出从`a.root-servers.net.`到`m.root-servers.net.`,它们对应的ip地址，已经内置在本地DNS服务器中了
 
-![1560238945877](https://raw.githubusercontent.com/jackluson/learn-path-recording-and-coding/master/docs/screenshots/1560238945877.png)
+![1560238945877](../screenshots/1560238945877.png)
 
 > 上面的截图大概分成4段
 
 **1.第一段**
 
-   > ![1560241035661](https://raw.githubusercontent.com/jackluson/learn-path-recording-and-coding/master/docs/screenshots/1560241035661.png)
+   > ![1560241035661](../screenshots/1560241035661.png)
    >
    > 根据内置的根域名服务器IP地址，DNS服务器向所有这些IP地址发出查询请求，询问`www.tungee.com`的顶级域名服务器com的NS记录。
 
 **2.第二段**
 
-> ![1560241453237](https://raw.githubusercontent.com/jackluson/learn-path-recording-and-coding/master/docs/screenshots/1560241453237.png)
+> ![1560241453237](../screenshots/1560241453237.png)
 >
 > 接着向`j.root-server.net`返回来的13条`.com`域名的NS记录，同时也返回来每一条的IP地址（这里并不是每一条都显示），然后DNS再向这些顶级域名服务器发出查询请求。查询tungee.com次级域名的NS记录
 
 **3.第三段**
 
-> ![1560242314260](https://raw.githubusercontent.com/jackluson/learn-path-recording-and-coding/master/docs/screenshots/1560242314260.png)
+> ![1560242314260](../screenshots/1560242314260.png)
 >
 > 同样，最先返回来的结果的是`i.gtld-server.net`域名服务器查询的结果，分别有`2`条NS记录，同时返回来每一条NS记录对应的IP地址，DNS服务器再向以上两台NS服务器查询tungee.com的主机ip地址
 
 **4.第四段**
 
-> ![1560242780840](https://raw.githubusercontent.com/jackluson/learn-path-recording-and-coding/master/docs/screenshots/1560242780840.png)
+> ![1560242780840](../screenshots/1560242780840.png)
 >
 > 最先返回来的`dns10.hichina.com`这个NS域名服务器的查询结果（A,Address，返回来的ip地址记录），得到ip地址之后，DNS服务器缓存起来，返回来浏览器
 
@@ -211,7 +211,7 @@ dig +trace www.tungee.com
 
 #### 1.DNS劫持的方法
 
-![img](https://raw.githubusercontent.com/jackluson/learn-path-recording-and-coding/master/docs/screenshots/mubwxk981b.jpeg)
+![img](../screenshots/mubwxk981b.jpeg)
 
 **下面大概说几种DNS劫持方法**
 
@@ -244,8 +244,6 @@ dig +trace www.tungee.com
 > 对于DNS劫持，往往单靠个人设置很难解决，如果已经出现了劫持现象的话，对电脑进去杀毒，清理，检查hosts文件，核查网络设置的DNS配置（可以使用写公共的DNS服务器）
 
 最后，查了很多资料才写了这篇文章，补充自己这方面的知识点，后面考虑继续写关于web安全--ddos攻击，xss，csrf等
-
-### 
 
 ### Reference 
 

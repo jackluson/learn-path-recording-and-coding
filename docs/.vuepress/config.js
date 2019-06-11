@@ -4,13 +4,17 @@ module.exports = {
   description: "一个记录个人学习路线的笔记",
   dest: "dist",
   head: [
+    ['meta', {charset: 'UTF-8'}],
     ['link', { rel: 'icon', href: `/favicon.ico` }],
     ['link', {rel: 'manifest', href: '/manifest.json'}],
     ['link',{
       'http-equiv':'x-ua-compatible',
       content:'ie=edge'
     }],
+    ['meta', {name: 'author', content: 'camel_lu'}],
     ['meta', {name: 'theme-color', content: '#3eaf7c'}],
+    ['meta', {name: 'viewport', content: 'width=device-width, initial-scale=1.0,maximum-scale=1,minimum-scale=1,user-scalable=no'}],
+    ['meta', {name: 'keywords', content: '笔记，知识点，回忆，前端，计算机，汇总'}],
     ['meta', {name: 'apple-mobile-web-app-status-bar-style', content: 'black'}],
     ['link', {
       rel: 'apple-touch-icon',
@@ -56,7 +60,8 @@ module.exports = {
         collapsable: false,
         children:[
           ['basics-principle/', 'Introduction'],
-          'basics-principle/process-thread'
+          'basics-principle/process-thread',
+          'basics-principle/dns-hijack'
         ]
       },
       {

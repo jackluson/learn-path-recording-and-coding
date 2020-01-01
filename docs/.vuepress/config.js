@@ -48,6 +48,14 @@ module.exports = {
         ]
       },
       {
+        title: "持续集成&自动化部署",
+        collapsable: false,
+        children:[
+          ['develop-flow/', 'Introduction'],
+          'develop-flow/travis-test',
+        ]
+      },
+      {
         title: "框架&库",
         collapsable: false,
         children:[

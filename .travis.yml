@@ -18,6 +18,7 @@ script:
 #命令里面的变量都是在Travis CI里配置过的。
 after_script:
   - cd dist
+  - git init
   - git config user.name "${U_NAME}"
   - git config At-Cost Domain Pricing - Domain Cost Club "${U_EMAIL}"
   - git add .

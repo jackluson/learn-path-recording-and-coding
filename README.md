@@ -6,5 +6,5 @@
 
 
 
-> 构建之后项目l：[https://jackluson.github.io/learn-path-recording-and-coding/](https://jackluson.github.io/learn-path-recording-and-coding/)
+> 构建之后项目URL：[https://jackluson.github.io/learn-path-recording-and-coding/](https://jackluson.github.io/learn-path-recording-and-coding/)
 

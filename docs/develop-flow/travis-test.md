@@ -2,7 +2,7 @@
 
 
 
-	### 配置 access-token
+### 配置 access-token
 
 因为Travis 在自动部署的时候，需要对github的仓库进去PUSH 操作，所以需要对Travis进去授权，Github提供了Access Token的方式，可以授权给Travis CI
 
@@ -71,10 +71,9 @@ branches:
 
 ### :books: Reference
 
-- [持续集成服务 Travis CI 教程]: http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html
+- [持续集成服务 Travis CI 教程](http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html)
 
-- [官方文档]: https://docs.travis-ci.com/
-
+- [官方文档](https://docs.travis-ci.com/)
 
 
 

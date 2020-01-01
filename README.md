@@ -1,6 +1,7 @@
 
 # 前言
 <div align="center">
+
 [![Build Status](https://travis-ci.com/jackluson/learn-path-recording-and-coding.svg?branch=master)](https://travis-ci.com/jackluson/learn-path-recording-and-coding)
 </div>
 

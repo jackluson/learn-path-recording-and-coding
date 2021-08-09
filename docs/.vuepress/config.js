@@ -72,8 +72,9 @@ module.exports = {
         collapsable: false,
         children: [
           ["develop-flow/", "Introduction"],
-          "develop-flow/travis-test",
+          "develop-flow/gitlab-with-jenkins",
           "develop-flow/dingtalk-gitlab",
+          "develop-flow/travis-test",
         ],
       },
       {

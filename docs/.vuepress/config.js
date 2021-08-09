@@ -1,7 +1,7 @@
 module.exports = {
   base: "/learn-path-recording-and-coding/",
-  title: "学习路线笔记",
-  description: "一个记录个人学习路线的笔记",
+  title: "学习笔记",
+  description: "一个记录个人学习的笔记",
   dest: "dist",
   head: [
     ["meta", { charset: "UTF-8" }],
@@ -82,6 +82,7 @@ module.exports = {
         collapsable: false,
         children: [
           ["library/", "Introduction"],
+          "library/vue-cli3-typescript",
           "library/vuepress",
           "library/babel-parser",
         ],

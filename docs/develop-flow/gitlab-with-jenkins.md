@@ -2,17 +2,17 @@
 
 本来只是想用 curl 去模拟触发部署静态资源的请求的。后来想到如果把这个操作交给 gitlab 操作岂不是更方便？ 所以这几天折腾了一下 gitlab 的 CI/CD,读了一些 gitlab 的官方文档，进一步完善了.gitlab-ci.yml。记录这个过程如下：
 
-### 模拟请求
+## 模拟请求
 
 > 利用 curl 命令行工具去模拟我们点击 `开始构建` 时那一时刻发起的第一个请求。
 
-#### 第一个请求
+### 第一个请求
 
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/365160/1593768148367-d6c374ae-c772-4494-b8f8-3fc6c26ed8f0.png#align=left&display=inline&height=563&margin=%5Bobject%20Object%5D&name=image.png&originHeight=563&originWidth=808&size=58988&status=done&style=none&width=808)
 经实践，第一个请求为上面的这个请求，重要参数是 json：xxx 和 Cookie，请求结果是一个 303 重定向。
 <a name="XGAOu"></a>
 
-#### 编写请求脚本
+### 编写请求脚本
 
 方便起见，首先用浏览器提供的方式，复制该请求。
 ![image.png](https://cdn.nlark.com/yuque/0/2020/png/365160/1593768350093-0da708c7-2e03-448d-bb7b-f8951e388695.png#align=left&display=inline&height=263&margin=%5Bobject%20Object%5D&name=image.png&originHeight=525&originWidth=599&size=61074&status=done&style=none&width=300)复制了整个请求之后，删除了一些不必要的参数之后，与提取 env， branch 这些变量之后， 得知下面的脚本
@@ -50,7 +50,7 @@ curl 'https://xxxx/job/tao.tao/build?delay=0sec' \
 
 <a name="KZ9kd"></a>
 
-### 安排到 gitlab 上面
+## 安排到 gitlab 上面
 
 > 注：原来已经有了.gitlab-ci.yml 文件存在了，主要负责： 当我们 push 代码到 gitlab 仓库之后，自动执行 build 命令，并且复制到目标静态资源仓库中，之后再 push 到 gitlab 上
 
@@ -92,7 +92,7 @@ if [ "$RES" ]; then { echo 'failed!'; exit 1;  } fi
 [fetch-jenkins.sh](https://www.yuque.com/attachments/yuque/0/2020/sh/365160/1593771950682-e5d84018-6882-4746-b001-082cb57a3565.sh?_lake_card=%7B%22uid%22%3A%221593771950767-0%22%2C%22src%22%3A%22https%3A%2F%2Fwww.yuque.com%2Fattachments%2Fyuque%2F0%2F2020%2Fsh%2F365160%2F1593771950682-e5d84018-6882-4746-b001-082cb57a3565.sh%22%2C%22name%22%3A%22fetch-jenkins.sh%22%2C%22size%22%3A602%2C%22type%22%3A%22text%2Fx-sh%22%2C%22ext%22%3A%22sh%22%2C%22progress%22%3A%7B%22percent%22%3A99%7D%2C%22status%22%3A%22done%22%2C%22percent%22%3A0%2C%22id%22%3A%22GoS0f%22%2C%22card%22%3A%22file%22%7D)
 <a name="O7ZU6"></a>
 
-### 忽略.gitlab-ci.yml 的作用
+## 忽略.gitlab-ci.yml 的作用
 
 如果我们有一个这样的需要,在某一次 push,我不需要 gitlab 执行构建任务,或者我们觉得 gitlab 构建任务 pengding 太久, 或者 running 太慢。 如何解决这个痛点呢？
 
@@ -106,7 +106,7 @@ if [ "$RES" ]; then { echo 'failed!'; exit 1;  } fi
 
 <a name="bbnOT"></a>
 
-### 本地执行 CI/CD 脚本
+## 本地执行 CI/CD 脚本
 
 > 如果觉得 gitlab 构建速度太慢,结合我之前写的构建脚本,同样也可以实现自动构建,自动部署。
 

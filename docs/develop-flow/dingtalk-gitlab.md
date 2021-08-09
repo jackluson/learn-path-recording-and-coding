@@ -1,10 +1,10 @@
 # 引入钉钉机器人通知 Gitlab CI/CD 的构建状态
 
-### 前言
+## 前言
 
 本篇是之前写的[《利用 Gitlab CI/CD 实现自动构建，自动部署》](https://www.yuque.com/docs/share/fd36e616-3df8-4e20-934d-9e129da3f15c)的续篇。我们知道 Gitlab 的 Pipeline 中的 Job 执行成功或者失败之后，对应 Job 状态会改变为 passedorfailed，当 Job 的状态改变之后， 我们需要再到 Gitlab CI/CD 的页面下查看 Job 的状态,去看看有没有打包完成。<br />实践表明，某些时候我们的 gitlab 执行 Job 往往需要等待很长且不稳定。导致我们反复到 CI/CD 的页面看看 Job 是否执行完毕。所以我们需要一个更友好，高效的 Job 执行完成状态的反馈方案。由此我想到了钉钉通知机器人。
 
-### 引入钉钉机器人
+## 引入钉钉机器人
 
 其实就是在一个钉钉群引入 webhook 机器人，然后给你提供 token 和 secret， 依照指定的格式发起 http 请求就可以了
 
@@ -28,7 +28,7 @@ const encryptSign = (secret, content) => {
 const sign = encryptSign(this.secret, timestamp + "\n" + this.secret);
 ```
 
-### 定制钉钉机器人
+## 定制钉钉机器人
 
 钉钉机器人支持多种类型消息，我们需要的是一个文本和卡片类型消息，图片如下。<br />![image.png](https://cdn.nlark.com/yuque/0/2020/png/365160/1594885514400-bc4c9728-8049-4db9-ab3c-31e390847a6d.png)<br />结合钉钉文档，我们封装了自己的机器人 dingtalkBot 类,支持快速发送文本和卡片消息。脚本如下：
 
@@ -146,7 +146,7 @@ module.exports = DingtalkBot;
 
 <a name="L2ZPz"></a>
 
-### 定制消息模板
+## 定制消息模板
 
 上面的消息类型我们知道，我们需要一些构建信息（项目，分支，环境等），还有需要@指定的提交人。经过折腾,我们知道 gitlab runner 执行 node 脚本时, process.env 这个变量下包含着我们需要的所有变量，如图所示<br />![image.png](https://cdn.nlark.com/yuque/0/2020/png/365160/1594886819835-463cebea-4931-4e9b-be5e-9cc185045a49.png#align=left&display=inline&height=425&margin=%5Bobject%20Object%5D&name=image.png&originHeight=851&originWidth=828&size=83113&status=done&style=none&width=414)
 
@@ -170,7 +170,7 @@ await robot.text("请查收你的构建信息", {
 
 如图：![image.png](https://cdn.nlark.com/yuque/0/2020/png/365160/1594889577117-e90e172e-2326-4e0b-bada-dd0a40eec40d.png#align=left&display=inline&height=537&margin=%5Bobject%20Object%5D&name=image.png&originHeight=715&originWidth=465&size=152393&status=done&style=none&width=349)<br />
 
-### 在之前的脚本中使用
+## 在之前的脚本中使用
 
 根据模拟 jenkins 请求的结果，node 执行上面的脚本之前，携带成功，失败状态，这里用 status 表示， 同时推出 js 脚本是，用 process.exit(status)退出，可参考下面脚本
 
@@ -192,6 +192,6 @@ fi
 
 <a name="jUWv5"></a>
 
-### 最后
+## 最后
 
 目前配置了 crm-finance 引入了这个机器人。后续需要的小伙伴可在自己的项目中引入，如果小伙伴想进入 Gitlab&Dingtalk 通知机器人测试群，可扫码加入哈。热烈欢迎！<br />![image.png](https://cdn.nlark.com/yuque/0/2020/png/365160/1594890417489-1e33a3a3-b365-4794-b031-903349cf5302.png#align=left&display=inline&height=369&margin=%5Bobject%20Object%5D&name=image.png&originHeight=736&originWidth=537&size=149438&status=done&style=none&width=269)

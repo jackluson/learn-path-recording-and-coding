@@ -82,6 +82,7 @@ module.exports = {
         collapsable: false,
         children: [
           ["library/", "Introduction"],
+          "library/react-test-library",
           "library/vue-cli3-typescript",
           "library/vuepress",
           "library/babel-parser",

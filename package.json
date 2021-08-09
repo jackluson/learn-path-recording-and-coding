@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/jackluson/learn-path-recording-and-coding#readme",
   "devDependencies": {
-    "vuepress": "^0.14.10"
+    "vuepress": "^1.7.1"
   },
   "dependencies": {
     "webpack-dev-middleware": "^3.6.0"

@@ -30,7 +30,7 @@ const sign = encryptSign(this.secret, timestamp + "\n" + this.secret);
 
 ## 定制钉钉机器人
 
-钉钉机器人支持多种类型消息，我们需要的是一个文本和卡片类型消息，图片如下。<br />![image.png](https://cdn.nlark.com/yuque/0/2020/png/365160/1594885514400-bc4c9728-8049-4db9-ab3c-31e390847a6d.png)<br />结合钉钉文档，我们封装了自己的机器人 dingtalkBot 类,支持快速发送文本和卡片消息。脚本如下：
+钉钉机器人支持多种类型消息，我们需要的是一个文本和卡片类型消息，图片如下。<br />![image.png](https://cdn.nlark.com/yuque/0/2021/png/365160/1628868307203-fb144850-5416-4e86-8435-b565fd9f53a8.png)<br />结合钉钉文档，我们封装了自己的机器人 dingtalkBot 类,支持快速发送文本和卡片消息。脚本如下：
 
 [dingtalkBot.js](https://www.yuque.com/attachments/yuque/0/2020/js/365160/1594885981137-af51c06f-1b5e-4f93-9bee-86fbd845fb51.js?_lake_card=%7B%22uid%22%3A%221594885981113-0%22%2C%22src%22%3A%22https%3A%2F%2Fwww.yuque.com%2Fattachments%2Fyuque%2F0%2F2020%2Fjs%2F365160%2F1594885981137-af51c06f-1b5e-4f93-9bee-86fbd845fb51.js%22%2C%22name%22%3A%22dingtalkBot.js%22%2C%22size%22%3A2942%2C%22type%22%3A%22text%2Fjavascript%22%2C%22ext%22%3A%22js%22%2C%22progress%22%3A%7B%22percent%22%3A99%7D%2C%22status%22%3A%22done%22%2C%22percent%22%3A0%2C%22id%22%3A%22HYfKA%22%2C%22card%22%3A%22file%22%7D)
 

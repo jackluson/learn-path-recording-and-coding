@@ -1,0 +1,22 @@
+{
+  "name": "JackLu's NoteBook",
+  "short_name": "JackLu's NoteBook",
+  "description": "一个记录个人学习的笔记",
+  "icons": [
+    {
+      "src": "/learn-path-recording-and-coding/assets/images/Paper-Plane-icon-128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    },
+    {
+      "src": "/learn-path-recording-and-coding/assets/images/Paper-Plane-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "#fff",
+  "theme_color": "#3eaf7c",
+  "start_url": "/learn-path-recording-and-coding/",
+  "display": "standalone",
+  "orientation": "portrait"
+}
